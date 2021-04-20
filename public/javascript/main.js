@@ -47,10 +47,6 @@ function create_element(todo_content, index){
 }
 
 
-//create_element("teste1", 0);
-//create_element("teste2", 1);
-//create_element("teste3", 2);
-
 // Create Footer:
 function create_footer(){
 
@@ -96,8 +92,6 @@ function create_footer(){
     ul_list.appendChild(li_Complete);
     ul_list.appendChild(li_Clear_Complete);
 }
-
-//create_footer();
 
 // Add element after insert text:
 function putOnFocusOut(element){
