@@ -112,10 +112,13 @@ function putOnFocusOut(element){
         create_element(element.value, tmp_length+1);
         create_footer();
     }
+
+    element.value = "";
 }
 
 // remove element:
 function remove(element){
+
     element.parentNode.remove();
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
 
@@ -128,6 +131,20 @@ function remove(element){
         }
     }
   }
+
+  function remove(){
+    let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
+
+    if(tmp_length != 0){return;}
+
+    let footer_ul = document.getElementById("footer-group-id");
+    if(footer_ul){
+        while (footer_ul.firstChild) {
+            footer_ul.removeChild(footer_ul.firstChild);
+        }
+    }
+  }
+
 
 // toggle line through:
 function toggleLineThrough(element){
@@ -187,10 +204,14 @@ function filterComplete(){
 // Clear All action:
 function filterClearAll(){
     let list_li = document.getElementById("list-group-id").getElementsByTagName('li');
+    var temp_array = [];
     for(var index = 0; index < list_li.length; index++){
+
         let span_tag = list_li[index].getElementsByTagName('span')[0];
         if(span_tag.classList.contains("custom-strikethrough")){
-            remove(list_li[index]);
+           temp_array.push(list_li[index]);
         }
     }
+    for(var index2 = 0; index2 < temp_array.length; index2++){ temp_array[index2].remove();}
+    remove();
 }
