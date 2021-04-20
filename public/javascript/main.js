@@ -71,15 +71,19 @@ function create_footer(){
 
     a_All.className = "nav-link active custom-pointer-event";
     a_All.innerHTML = "All";
+    a_All.onclick = function(){filterAll();}
 
     a_Active.className = "nav-link active custom-pointer-event";
     a_Active.innerHTML = "Active";
+    a_Active.onclick = function(){filterActive();}
 
     a_Compelte.className = "nav-link active custom-pointer-event";
     a_Compelte.innerHTML = "Complete";
+    a_Compelte.onclick = function(){filterComplete();}
 
     a_Clear_Complete.className = "nav-link active custom-pointer-event";
     a_Clear_Complete.innerHTML = "Clear Complete";
+    a_Clear_Complete.onclick = function(){filterClearAll();}
 
     li_All.appendChild(a_All);
     li_Active.appendChild(a_Active);
@@ -101,7 +105,6 @@ function putOnFocusOut(element){
     if(element.value == ""){return;}
 
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
-    console.log(tmp_length);
     if(tmp_length >= 1){
         create_element(element.value, tmp_length+1);
     }
@@ -111,11 +114,8 @@ function putOnFocusOut(element){
     }
 }
 
-/* ===================== */
-
 // remove element:
 function remove(element){
-
     element.parentNode.remove();
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
 
@@ -135,13 +135,62 @@ function toggleLineThrough(element){
     tmp.classList.toggle("custom-strikethrough");
 }
 
-// filter 'all':
 
+// filter 'all':
+function filterAll(){
+    let list_li = document.getElementById("list-group-id").getElementsByTagName('li');
+    
+    for(var index = 0; index < list_li.length; index++){
+            list_li[index].classList.remove("d-none");
+            list_li[index].classList.add("d-flex");
+    }
+}
 
 // filter 'Active':
+function filterActive(){
+    let list_li = document.getElementById("list-group-id").getElementsByTagName('li');
+    
+    for(var index = 0; index < list_li.length; index++){
 
+        let span_tag = list_li[index].getElementsByTagName('span')[0];
+
+        if(span_tag.classList.contains("custom-strikethrough")){
+            list_li[index].classList.add("d-none");
+            list_li[index].classList.remove("d-flex");
+        }
+        else{
+            list_li[index].classList.remove("d-none");
+            list_li[index].classList.add("d-flex");
+        }
+    }
+}
 
 // filter 'Complete':
+function filterComplete(){
+    let list_li = document.getElementById("list-group-id").getElementsByTagName('li');
 
+    for(var index = 0; index < list_li.length; index++){
+
+        let span_tag = list_li[index].getElementsByTagName('span')[0];
+
+        if(span_tag.classList.contains("custom-strikethrough")){
+            list_li[index].classList.remove("d-none");
+            list_li[index].classList.add("d-flex");
+        }
+        else{
+            list_li[index].classList.add("d-none");
+            list_li[index].classList.remove("d-flex");
+        }
+    }
+}
 
 // Clear All action:
+function filterClearAll(){
+    let list_li = document.getElementById("list-group-id").getElementsByTagName('li');
+    for(var index = 0; index < list_li.length; index++){
+        let span_tag = list_li[index].getElementsByTagName('span')[0];
+        if(span_tag.classList.contains("custom-strikethrough")){
+            remove(list_li[index]);
+        }
+    }
+}

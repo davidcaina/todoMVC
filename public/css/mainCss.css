@@ -15,3 +15,7 @@ span.custom-strikethrough {
 .custom-pointer-event{
     cursor: pointer;
 }
+
+.custon-hidde-element{
+    display: none !important;
+}
