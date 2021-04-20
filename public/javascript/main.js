@@ -126,7 +126,7 @@ function remove(element){
     }
   }
 
-  function remove(){
+  function clean_footer(){
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
 
     if(tmp_length != 0){return;}
@@ -207,5 +207,5 @@ function filterClearAll(){
         }
     }
     for(var index2 = 0; index2 < temp_array.length; index2++){ temp_array[index2].remove();}
-    remove();
+    clean_footer();
 }
