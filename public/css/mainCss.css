@@ -1,0 +1,17 @@
+
+.custom-hoverBorder{
+    border: 1px solid transparent;
+}
+
+.custom-hoverBorder:hover{
+    border: 1px solid #d0d0d0;
+}
+
+
+span.custom-strikethrough {
+    text-decoration: line-through;
+  }
+
+.custom-pointer-event{
+    cursor: pointer;
+}
