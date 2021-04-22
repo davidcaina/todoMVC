@@ -63,7 +63,7 @@ function create_footer(){
     var a_Clear_Complete = document.createElement("a");
     
     li_Number.className = "nav-item";
-    li_Number.innerHTML = "itens left";
+    li_Number.innerHTML = "Itens left:";
 
     li_All.className = "nav-item custom-hoverBorder";
     li_Active.className = "nav-item custom-hoverBorder";

@@ -21,6 +21,6 @@ span.custom-strikethrough {
 }
 
 .custom-spanNumber{
-    display: block;
+    display: inline-block !important;
     font-weight: bold;
 }
