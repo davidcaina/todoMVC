@@ -19,3 +19,8 @@ span.custom-strikethrough {
 .custon-hidde-element{
     display: none !important;
 }
+
+.custom-spanNumber{
+    display: block;
+    font-weight: bold;
+}

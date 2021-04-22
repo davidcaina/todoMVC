@@ -50,20 +50,30 @@ function create_element(todo_content, index){
 // Create Footer:
 function create_footer(){
 
+    var li_Number = document.createElement("li");
     var li_All = document.createElement("li");
     var li_Active = document.createElement("li");
     var li_Complete = document.createElement("li");
     var li_Clear_Complete = document.createElement("li");
 
+    var span_Number = document.createElement("span");
     var a_All = document.createElement("a");
     var a_Active = document.createElement("a");
     var a_Compelte = document.createElement("a");
     var a_Clear_Complete = document.createElement("a");
     
+    li_Number.className = "nav-item";
+    li_Number.innerHTML = "itens left";
+
     li_All.className = "nav-item custom-hoverBorder";
     li_Active.className = "nav-item custom-hoverBorder";
     li_Complete.className = "nav-item custom-hoverBorder";
     li_Clear_Complete.className = "nav-item custom-hoverBorder";
+
+
+    span_Number.className = "nav-link active custom-spanNumber";
+    span_Number.id = "span-number";
+    span_Number.innerHTML = "0";
 
     a_All.className = "nav-link active custom-pointer-event";
     a_All.innerHTML = "All";
@@ -81,16 +91,37 @@ function create_footer(){
     a_Clear_Complete.innerHTML = "Clear Complete";
     a_Clear_Complete.onclick = function(){filterClearAll();}
 
+    li_Number.appendChild(span_Number);
     li_All.appendChild(a_All);
     li_Active.appendChild(a_Active);
     li_Complete.appendChild(a_Compelte);
     li_Clear_Complete.appendChild(a_Clear_Complete);
 
     var ul_list = document.getElementById("footer-group-id");
+
+    ul_list.appendChild(li_Number);
     ul_list.appendChild(li_All);
     ul_list.appendChild(li_Active);
     ul_list.appendChild(li_Complete);
     ul_list.appendChild(li_Clear_Complete);
+}
+
+// Add itens in span:
+function addItensLeft(){
+
+    var tmp_span = document.getElementById("span-number");
+    console.log(tmp_span);
+    let value = parseInt(tmp_span.innerHTML,10)+1;
+    tmp_span.innerHTML = value;
+}
+
+// remove itens from span:
+function minustensLeft(){
+
+    var tmp_span = document.getElementById("span-number");
+    console.log(tmp_span);
+    let value = parseInt(tmp_span.innerHTML,10)-1;
+    tmp_span.innerHTML = value;
 }
 
 // Add element after insert text:
@@ -101,10 +132,12 @@ function putOnFocusOut(element){
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
     if(tmp_length >= 1){
         create_element(element.value, tmp_length+1);
+        addItensLeft();
     }
     else{
         create_element(element.value, tmp_length+1);
         create_footer();
+        addItensLeft();
     }
 
     element.value = "";
@@ -114,6 +147,7 @@ function putOnFocusOut(element){
 function remove(element){
 
     element.parentNode.remove();
+    minustensLeft();
     let tmp_length = document.getElementById("list-group-id").getElementsByTagName('li').length;
 
     if(tmp_length != 0){return;}
@@ -143,6 +177,12 @@ function remove(element){
 // toggle line through:
 function toggleLineThrough(element){
     var tmp = element.parentNode.getElementsByTagName('span')[0];
+    if(tmp.classList.contains("custom-strikethrough")){
+        addItensLeft();
+    }
+    else{
+        minustensLeft();
+    }
     tmp.classList.toggle("custom-strikethrough");
 }
 
